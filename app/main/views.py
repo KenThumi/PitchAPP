@@ -1,8 +1,8 @@
 from flask import render_template,redirect,url_for, flash,request
 from . import main
 from flask_login import login_required, current_user
-from .forms import CategoryForm,PitchForm
-from ..models import Category,Pitch
+from .forms import CategoryForm,PitchForm, CommentForm
+from ..models import Category,Pitch,Comment
 from .. import db
 
 @main.route('/')
@@ -22,10 +22,24 @@ def home():
     return render_template('index.html', content=content,  categories = link_categories )
 
 
-@main.route('/comment')
+@main.route('/comment/<id>', methods = ["GET","POST"])
 @login_required
-def comment():
-    pass
+def comment(id):
+    form = CommentForm()
+
+    if form.validate_on_submit():
+        if Pitch.query.get(int(id)):
+            comment = Comment(comment=form.comment.data,pitch_id=int(id),user_id = current_user.id)
+            db.session.add(comment)
+            db.session.commit()
+            
+            flash('Comment added successfully','success')
+            return redirect( url_for('main.home'))
+        else:
+            flash('Subject pitch not unretrievable','warning')
+
+    return render_template('commentForm.html', comment_form=form)
+
 
 @main.route('/addPitchCategory', methods = ["GET","POST"])
 @login_required

@@ -1,6 +1,6 @@
 import email_validator
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField, ValidationError, TextAreaField,SelectField #,BooleanField
+from wtforms import StringField,HiddenField,PasswordField,SubmitField, ValidationError, TextAreaField,SelectField #,BooleanField
 from wtforms.validators import DataRequired,Email ,Length
 from ..models import User,Pitch,Category
 
@@ -16,6 +16,14 @@ class PitchForm(FlaskForm):
 
     pitch = TextAreaField('Pitch', validators=[DataRequired()])
     category = SelectField('Programming Language',validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
+
+class CommentForm(FlaskForm):
+    '''Class to generate pitch form'''
+
+    comment = TextAreaField('Write a Comment', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
    

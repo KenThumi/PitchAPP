@@ -16,6 +16,13 @@
                         <a class=" mr-3" href="#{{ '-'.join(cat.category.split()) }}">{{cat.category}}</a>
                     {% endfor %}
                   <hr>
+                        <!--Flash message -->
+                    {% for category,message in get_flashed_messages(with_categories=true) %}
+                    <div class="alert alert-{{category}}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                    </div>
+                    {%endfor%}
             </div>
         </div>
      
@@ -57,6 +64,9 @@
               <br>
             {% endfor %}
          </div>
+        </div>
+        <div>
+            <hr>
         </div>
       {% endfor %}
         

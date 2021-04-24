@@ -12,7 +12,7 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255), unique = True, index=True)
     pass_secure = db.Column(db.String(255))
     pitches = db.relationship('Pitch',backref = 'user',lazy="dynamic")
-
+    comments = db.relationship('Comment',backref = 'user',lazy="dynamic")
 
     @property
     def password(self):
@@ -52,6 +52,7 @@ class Pitch(db.Model):
     downvote = db.Column(db.Integer)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer,db.ForeignKey('categories.id'))
+    comments = db.relationship('Comment',backref = 'pitch',lazy="dynamic")
 
     def __repr__(self):
         return f'Pitch: {self.pitch}'
@@ -78,3 +79,21 @@ class Category(db.Model):
 
     def __repr__(self):
         return f'Category: {self.category}'
+
+
+class Comment(db.Model):
+    '''
+        Manages a comment
+        Args: db.Models
+    '''
+
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.Text)
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    
+
+    def __repr__(self):
+        return f'Comment: {self.comment}'
