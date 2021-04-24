@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from .forms import CategoryForm,PitchForm, CommentForm
 from ..models import Category,Pitch,Comment
 from .. import db
+from sqlalchemy import desc
 
 @main.route('/')
 def home():
@@ -14,7 +15,7 @@ def home():
     link_categories = []
 
     for cat in categories:
-        pitch = Pitch.query.filter_by(category_id=cat.id).all()
+        pitch = Pitch.query.filter_by(category_id=cat.id).order_by(desc(Pitch.id)).all()
         if len(pitch)>0:                           #take categories that have pitches
             content.append(pitch)
             link_categories.append(cat)
