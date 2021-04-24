@@ -1,6 +1,6 @@
 from flask import render_template,redirect,url_for, flash,request
 from . import main
-from flask_login import login_required
+from flask_login import login_required, current_user
 from .forms import CategoryForm,PitchForm
 from ..models import Category,Pitch
 from .. import db
@@ -8,7 +8,17 @@ from .. import db
 @main.route('/')
 def home():
     '''Home route'''
-    return render_template('index.html')
+    categories = Category.query.all()
+
+    content=[]
+
+    for cat in categories:
+        pitch = Pitch.query.filter_by(category_id=cat.id).all()
+        if len(pitch)>0:
+            content.append(pitch)
+
+    
+    return render_template('index.html', content=content)
 
 
 @main.route('/comment')
@@ -40,9 +50,18 @@ def addpitchcategory():
 @login_required
 def addpitch():
     form = PitchForm()
-
     form.category.choices = Category.selectFieldChoices() #get categories list of tuples for select input
     selectTop = ('','- select -')  
     form.category.choices.insert(0,selectTop) #prepend '- select- ' to start at top of the select input
+
+    if form.validate_on_submit():
+        pitch = Pitch(pitch=form.pitch.data,upvote=0,downvote=0,user_id=current_user.id,category_id=form.category.data)  
+        db.session.add(pitch)
+        db.session.commit()
+
+        form.category.data = '' #clear form
+        form.pitch.data = ''
+
+        flash('Pitch added successfully','success')  
 
     return render_template('pitchForm.html', pitch_form=form)

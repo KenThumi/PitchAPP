@@ -47,7 +47,7 @@ class Pitch(db.Model):
     __tablename__ = 'pitches'
 
     id = db.Column(db.Integer, primary_key=True)
-    pitch = db.Column(db.String(255))
+    pitch = db.Column(db.Text)
     upvote = db.Column(db.Integer)
     downvote = db.Column(db.Integer)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
@@ -71,7 +71,7 @@ class Category(db.Model):
 
     @classmethod
     def selectFieldChoices(cls):
-        '''creates value,label pairs for select field'''
+        '''creates value,label tuple pairs for select field'''
       
         return [(c.id,c.category) for c in cls.query.all()]
 

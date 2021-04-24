@@ -2,19 +2,29 @@
 
 {% block content %}
 
-    <div class="container my-2">
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                  <div class="float-right">
+                    <a href="{{ url_for('main.addpitch')}}" class="btn btn-sm btn-success">Add Pitch</a>
+                    <a href="{{ url_for('main.addpitchcategory')}}" class="btn btn-sm btn-success mr-2">Add Pitch Category</a>
+                  </div>
+            </div>
+        </div>
+     
+        {% for cont in content%}
         <div class="row">
             <legend>
-                <h1>Pick-Up lines</h1>
+                <h2>{{ cont[0].pitch_category.category}}</h2>
             </legend>
-            <div class="card-deck">
-            {% for i in range(1,10) %}
-                <div class="col-md-3">
+            <div class="card-deckk">
+            {% for data in cont %}
+                <div class="col-md-12">
                     <div class="card m-1 card-border" style="width: 100%;">
                         <div class="card-body card-border">
-                          <p class="card-text font-italic text-mutedd">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <p class="card-text font-italic text-mutedd">{{data.pitch | safe}}.</p>
                           <small class="text-muted float-right"> 
-                            - username
+                            - {{data.user.username}}
                         </small><br>
                           <a href="#" class="card-link">Comment</a>
                          
@@ -29,11 +39,11 @@
                         </div>
                     </div>
                 </div>
-
+              <br>
             {% endfor %}
          </div>
         </div>
-      
+      {% endfor %}
         
     </div>
 {% endblock %}
