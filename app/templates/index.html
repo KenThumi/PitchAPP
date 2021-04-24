@@ -40,7 +40,23 @@
                           <small class="text-muted float-right"> 
                             - {{data.user.username}}
                         </small><br>
-                          <a href="#" class="card-link">Comment</a>
+                        <div class="float-left">
+                              <a href="{{ url_for('main.comment',id=data.id)}}" target="_blank" class="card-link">
+                              Comment
+                              <span class="ml-1">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                              </span>
+                            </a>
+                        </div>
+                        <div class="float-right">
+                            <button class="btn btn-sm btn-outline-info"  data-toggle="modal" data-target="#modal{{data.id}}">
+                                View Comments
+                                <span class="badge badge-warning">
+                                    {{ data.comments.count() }}
+                                </span>
+                            </button>
+                            
+                        </div>
                          
                         </div>
                         <div class="card-footer card-border">
@@ -62,6 +78,8 @@
                     </div>
                 </div>
               <br>
+
+              {% include '_modal.html' %}
             {% endfor %}
          </div>
         </div>
