@@ -11,6 +11,7 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255), unique = True)
     email = db.Column(db.String(255), unique = True, index=True)
     pass_secure = db.Column(db.String(255))
+    pitches = db.relationship('Pitch',backref = 'user',lazy="dynamic")
 
 
     @property
@@ -35,3 +36,35 @@ class User(UserMixin,db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+class Pitch(db.Model):
+    '''
+        Manages a pitch 
+        Args: db.Models
+    '''
+
+    __tablename__ = 'pitches'
+
+    id = db.Column(db.Integer, primary_key=True)
+    pitch = db.Column(db.String(255))
+    upvote = db.Column(db.Integer)
+    downvote = db.Column(db.Integer)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    category_id = db.Column(db.Integer,db.ForeignKey('categories.id'))
+
+    def __repr__(self):
+        return f'Pitch: {self.pitch}'
+
+
+class Category(db.Model):
+    '''
+        Manages a category 
+        Args: db.Models
+    '''
+
+    __tablename__='categories'
+
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(255))
+    pitches = db.relationship('Pitch',backref = 'pitch_category',lazy="dynamic")
