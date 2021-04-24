@@ -17,7 +17,7 @@
             <legend>
                 <h2>{{ cont[0].pitch_category.category}}</h2>
             </legend>
-            <div class="card-deckk">
+            <div class="card-deck">
             {% for data in cont %}
                 <div class="col-md-12">
                     <div class="card m-1 card-border" style="width: 100%;">
@@ -31,10 +31,18 @@
                         </div>
                         <div class="card-footer card-border">
                             <div class="float-left">
-                                <div class="btn btn-outline-success btn-sm">Thumb Up</div>
+                                <div class="btn btn-outline-success btn-sm">
+                                    <span>Upvote
+                                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                    </span>
+                                </div>
                             </div>
                             <div class="float-right">
-                                <div class="btn btn-outline-danger btn-sm">Thumb Down</div>
+                                <div class="btn btn-outline-danger btn-sm">
+                                    <span>Downvote
+                                        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
