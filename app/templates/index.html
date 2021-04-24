@@ -10,10 +10,17 @@
                     <a href="{{ url_for('main.addpitchcategory')}}" class="btn btn-sm btn-success mr-2">Add Pitch Category</a>
                   </div>
             </div>
+            <div class="col-12">
+                  Go to Pitch Category:
+                    {% for cat in  categories %}
+                        <a class=" mr-3" href="#{{ '-'.join(cat.category.split()) }}">{{cat.category}}</a>
+                    {% endfor %}
+                  <hr>
+            </div>
         </div>
      
         {% for cont in content%}
-        <div class="row">
+        <div class="row" id="{{ '-'.join(cont[0].pitch_category.category.split()) }}">
             <legend>
                 <h2>{{ cont[0].pitch_category.category}}</h2>
             </legend>

@@ -11,14 +11,15 @@ def home():
     categories = Category.query.all()
 
     content=[]
+    link_categories = []
 
     for cat in categories:
         pitch = Pitch.query.filter_by(category_id=cat.id).all()
-        if len(pitch)>0:
+        if len(pitch)>0:                           #take categories that have pitches
             content.append(pitch)
+            link_categories.append(cat)
 
-    
-    return render_template('index.html', content=content)
+    return render_template('index.html', content=content,  categories = link_categories )
 
 
 @main.route('/comment')
