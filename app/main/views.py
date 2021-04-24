@@ -1,7 +1,7 @@
 from flask import render_template,redirect,url_for, flash,request
 from . import main
 from flask_login import login_required
-from .forms import CategoryForm
+from .forms import CategoryForm,PitchForm
 from ..models import Category,Pitch
 from .. import db
 
@@ -34,3 +34,15 @@ def addpitchcategory():
         
 
     return render_template('categoryForm.html', category_form=form)
+
+
+@main.route('/addPitch', methods = ["GET","POST"])
+@login_required
+def addpitch():
+    form = PitchForm()
+
+    form.category.choices = Category.selectFieldChoices() #get categories list of tuples for select input
+    selectTop = ('','- select -')  
+    form.category.choices.insert(0,selectTop) #prepend '- select- ' to start at top of the select input
+
+    return render_template('pitchForm.html', pitch_form=form)

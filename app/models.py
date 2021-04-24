@@ -68,3 +68,13 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(255))
     pitches = db.relationship('Pitch',backref = 'pitch_category',lazy="dynamic")
+
+    @classmethod
+    def selectFieldChoices(cls):
+        '''creates value,label pairs for select field'''
+      
+        return [(c.id,c.category) for c in cls.query.all()]
+
+
+    def __repr__(self):
+        return f'Category: {self.category}'
