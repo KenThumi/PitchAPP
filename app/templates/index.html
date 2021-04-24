@@ -60,20 +60,44 @@
                          
                         </div>
                         <div class="card-footer card-border">
-                            <div class="float-left">
-                                <div class="btn btn-outline-success btn-sm">
-                                    <span>Upvote
-                                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                    </span>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="float-left">
+                                        <a href="{{ url_for('main.upvote',id=data.id)}}" class="btn btn-outline-success btn-sm">
+                                            <span>Upvote
+                                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mx-auto d-block float-none" style="width: 40%;">
+                                        <span>
+                                            <small>
+                                                <i class="fa fa-thumbs-up " aria-hidden="true"></i>:{{data.upvote}}
+                                            </small>
+                                           
+                                        </span> |
+                                        <span>
+                                            <small>
+                                                <i class="fa fa-thumbs-down " aria-hidden="true"></i>:{{data.downvote}}
+                                            </small>
+                                           
+                                        </span>                                
+        
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="float-right">
+                                        <a href="{{ url_for('main.downvote',id=data.id)}}" class="btn btn-outline-danger btn-sm">
+                                            <span>Downvote
+                                                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="float-right">
-                                <div class="btn btn-outline-danger btn-sm">
-                                    <span>Downvote
-                                        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </div>
+                        
                         </div>
                     </div>
                 </div>

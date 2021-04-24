@@ -36,7 +36,7 @@ def comment(id):
             flash('Comment added successfully','success')
             return redirect( url_for('main.home'))
         else:
-            flash('Subject pitch not unretrievable','warning')
+            flash('Subject pitch unretrievable','warning')
 
     return render_template('commentForm.html', comment_form=form)
 
@@ -80,3 +80,31 @@ def addpitch():
         flash('Pitch added successfully','success')  
 
     return render_template('pitchForm.html', pitch_form=form)
+
+
+@main.route('/upvote/<id>')
+def upvote(id):
+    if Pitch.query.get(int(id)):
+        pitch = Pitch.query.get(int(id))
+        pitch.upvote +=1
+        db.session.add(pitch)
+        db.session.commit() 
+        flash('Vote submitted successfully','success')
+    else:
+        flash('Subject pitch unretrievable','warning')
+
+    return redirect( url_for('main.home'))
+
+
+@main.route('/downvote/<id>')
+def downvote(id):
+    if Pitch.query.get(int(id)):
+        pitch = Pitch.query.get(int(id))
+        pitch.downvote +=1
+        db.session.add(pitch)
+        db.session.commit() 
+        flash('Vote submitted successfully','success')
+    else:
+        flash('Subject pitch unretrievable','warning')
+        
+    return redirect( url_for('main.home'))
