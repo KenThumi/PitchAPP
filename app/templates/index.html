@@ -4,12 +4,14 @@
 
     <div class="container my-4">
         <div class="row">
+            {% if current_user.is_authenticated %}
             <div class="col-12">
                   <div class="float-right">
                     <a href="{{ url_for('main.addpitch')}}" class="btn btn-sm btn-success">Add Pitch</a>
                     <a href="{{ url_for('main.addpitchcategory')}}" class="btn btn-sm btn-success mr-2">Add Pitch Category</a>
                   </div>
             </div>
+            {%endif%}
             <div class="col-12">
                   Go to Pitch Category:
                     {% for cat in  categories %}

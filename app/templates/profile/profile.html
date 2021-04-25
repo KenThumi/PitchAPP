@@ -27,7 +27,9 @@
             
             <p>
                 {% if user == current_user %}
-            <a href="{{url_for('main.update_profile',uname=user.username)}}" class="btn btn-sm btn-outline-warning mx-auto d-block my-2">Edit profile</a>
+            <a href="{{url_for('main.update_profile',uname=user.username)}}" class="btn btn-sm btn-outline-warning mx-auto d-block my-2">
+                <i class="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>
+                Edit Bio</a>
                 {% endif %}
             </p>
         
