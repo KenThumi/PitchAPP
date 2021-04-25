@@ -13,106 +13,113 @@
             </div>
             {%endif%}
             <div class="col-12">
-                  Go to Pitch Category:
-                    {% for cat in  categories %}
-                        <a class=" mr-3" href="#{{ '-'.join(cat.category.split()) }}">{{cat.category}}</a>
-                    {% endfor %}
-                  <hr>
-                        <!--Flash message -->
-                    {% for category,message in get_flashed_messages(with_categories=true) %}
-                    <div class="alert alert-{{category}}">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ message }}
-                    </div>
-                    {%endfor%}
+                {% if categories %}
+                        Go to Pitch Category:
+                            {% for cat in  categories %}
+                                <a class=" mr-3" href="#{{ '-'.join(cat.category.split()) }}">{{cat.category}}</a>
+                            {% endfor %}
+                        <hr>
+                                <!--Flash message -->
+                            {% for category,message in get_flashed_messages(with_categories=true) %}
+                            <div class="alert alert-{{category}}">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{ message }}
+                            </div>
+                            {%endfor%}
+                {%endif%}
             </div>
         </div>
-     
-        {% for cont in content%}
-        <div class="row" id="{{ '-'.join(cont[0].pitch_category.category.split()) }}">
-            <legend>
-                <h2>{{ cont[0].pitch_category.category}}</h2>
-            </legend>
-            <div class="card-deck">
-            {% for data in cont %}
-                <div class="col-md-12">
-                    <div class="card m-1 card-border" style="width: 100%;">
-                        <div class="card-body card-border">
-                          <p class="card-text font-italic text-mutedd">{{data.pitch | safe}}.</p>
-                          <small class="text-muted float-right"> 
-                            - {{data.user.username}}
-                        </small><br>
-                        <div class="float-left">
-                              <a href="{{ url_for('main.comment',id=data.id)}}" target="_blank" class="card-link">
-                              Comment
-                              <span class="ml-1">
-                                <i class="fa fa-comment" aria-hidden="true"></i>
-                              </span>
-                            </a>
-                        </div>
-                        <div class="float-right">
-                            <button class="btn btn-sm btn-outline-info"  data-toggle="modal" data-target="#modal{{data.id}}">
-                                View Comments
-                                <span class="badge badge-warning">
-                                    {{ data.comments.count() }}
-                                </span>
-                            </button>
-                            
-                        </div>
-                         
-                        </div>
-                        <div class="card-footer card-border">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="float-left">
-                                        <a href="{{ url_for('main.upvote',id=data.id)}}" class="btn btn-outline-success btn-sm">
-                                            <span>Upvote
-                                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                            </span>
-                                        </a>
-                                    </div>
+            {% if content %}
+                {% for cont in content%}
+                <div class="row" id="{{ '-'.join(cont[0].pitch_category.category.split()) }}">
+                    <legend>
+                        <h2>{{ cont[0].pitch_category.category}}</h2>
+                    </legend>
+                    <div class="card-deck">
+                    {% for data in cont %}
+                        <div class="col-md-12">
+                            <div class="card m-1 card-border" style="width: 89vw;">
+                                <div class="card-body card-border">
+                                <p class="card-text font-italic text-mutedd">{{data.pitch | safe}}.</p>
+                                <small class="text-muted float-right"> 
+                                    - {{data.user.username}}
+                                </small><br>
+                                <div class="float-left">
+                                    <a href="{{ url_for('main.comment',id=data.id)}}" target="_blank" class="card-link">
+                                    Comment
+                                    <span class="ml-1">
+                                        <i class="fa fa-comment" aria-hidden="true"></i>
+                                    </span>
+                                    </a>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="mx-auto d-block float-none" style="width: 40%;">
-                                        <span>
-                                            <small>
-                                                <i class="fa fa-thumbs-up " aria-hidden="true"></i>:{{data.upvote}}
-                                            </small>
-                                           
-                                        </span> |
-                                        <span>
-                                            <small>
-                                                <i class="fa fa-thumbs-down " aria-hidden="true"></i>:{{data.downvote}}
-                                            </small>
-                                           
-                                        </span>                                
-        
-                                    </div>
+                                <div class="float-right">
+                                    <button class="btn btn-sm btn-outline-info"  data-toggle="modal" data-target="#modal{{data.id}}">
+                                        View Comments
+                                        <span class="badge badge-warning">
+                                            {{ data.comments.count() }}
+                                        </span>
+                                    </button>
+                                    
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="float-right">
-                                        <a href="{{ url_for('main.downvote',id=data.id)}}" class="btn btn-outline-danger btn-sm">
-                                            <span>Downvote
-                                                <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                                            </span>
-                                        </a>
+                                
+                                </div>
+                                <div class="card-footer card-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="float-left">
+                                                <a href="{{ url_for('main.upvote',id=data.id)}}" class="btn btn-outline-success btn-sm">
+                                                    <span>Upvote
+                                                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mx-auto d-block float-none" style="width: 40%;">
+                                                <span>
+                                                    <small>
+                                                        <i class="fa fa-thumbs-up " aria-hidden="true"></i>:{{data.upvote}}
+                                                    </small>
+                                                
+                                                </span> |
+                                                <span>
+                                                    <small>
+                                                        <i class="fa fa-thumbs-down " aria-hidden="true"></i>:{{data.downvote}}
+                                                    </small>
+                                                
+                                                </span>                                
+                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="float-right">
+                                                <a href="{{ url_for('main.downvote',id=data.id)}}" class="btn btn-outline-danger btn-sm">
+                                                    <span>Downvote
+                                                        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
+                                
                                 </div>
                             </div>
-                        
                         </div>
-                    </div>
-                </div>
-              <br>
+                    <br>
 
-              {% include '_modal.html' %}
-            {% endfor %}
-         </div>
-        </div>
-        <div>
-            <hr>
-        </div>
-      {% endfor %}
-        
+                    {% include '_modal.html' %}
+                    {% endfor %}
+                </div>
+                </div>
+                <div>
+                    <hr>
+                </div>
+                {% endfor %}
+            {%else%}
+            <p class="my-2">
+                No Records, sign up and add records.
+            </p>
+            {%endif%}
+
     </div>
 {% endblock %}
