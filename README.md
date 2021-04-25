@@ -41,35 +41,36 @@ Below are steps to follow:
 In this project, below is a list of technologies used:
 - [Python version 3](https://www.python.org/)
 
-alembic==1.5.8
-blinker==1.4
-click==7.1.2
-dnspython==2.1.0
-dominate==2.6.0
-email-validator==1.1.2
-Flask==1.1.2
-Flask-Bootstrap4==4.0.2
-Flask-Login==0.5.0
-Flask-Mail==0.9.1
-Flask-Migrate==2.7.0
-Flask-Script==2.0.6
-Flask-SQLAlchemy==2.5.1
-Flask-Uploads==0.2.1
-Flask-WTF==0.14.3
-greenlet==1.0.0
-idna==3.1
-itsdangerous==1.1.0
-Jinja2==2.11.3
-Mako==1.1.4
-MarkupSafe==1.1.1
-psycopg2==2.8.6
-python-dateutil==2.8.1
-python-editor==1.0.4
-six==1.15.0
-SQLAlchemy==1.4.11
-visitor==0.1.3
-Werkzeug==0.16.0
-WTForms==2.3.3
+## Dependencies
+alembic==1.5.8,
+blinker==1.4,
+click==7.1.2,
+dnspython==2.1.0,
+dominate==2.6.0,
+email-validator==1.1.2,
+Flask==1.1.2,
+Flask-Bootstrap4==4.0.2,
+Flask-Login==0.5.0,
+Flask-Mail==0.9.1,
+Flask-Migrate==2.7.0,
+Flask-Script==2.0.6,
+Flask-SQLAlchemy==2.5.1,
+Flask-Uploads==0.2.1,
+Flask-WTF==0.14.3,
+greenlet==1.0.0,
+idna==3.1,
+itsdangerous==1.1.0,
+Jinja2==2.11.3,
+Mako==1.1.4,
+MarkupSafe==1.1.1,
+psycopg2==2.8.6,
+python-dateutil==2.8.1,
+python-editor==1.0.4,
+six==1.15.0,
+SQLAlchemy==1.4.11,
+visitor==0.1.3,
+Werkzeug==0.16.0,
+WTForms==2.3.3,
 
 ## License info
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
