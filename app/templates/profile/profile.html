@@ -3,53 +3,111 @@
 {% block content %}
 <div class="container my-2">
     <div class="row">
-    <!-- displaying  Username-->
-    <div class="col-md-4">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <h3> {{user.username| capitalize}} </h3>
-            </li>
-            <li class="list-group-item">
-                Email <span class="text-muted">
-                   <p>{{user.email}}</p> 
-                </span>
-            </li>
-            <li class="list-group-item">
-                Bio <span class="text-muted">
-                    {% if user.bio %}
-                    <p> {{user.bio}}</p>
-                    {%else%}
-                    <p> {{user.username| capitalize}} has no bio </p>
-                    {% endif %}
-                </span>
-            
-        </ul>
         
-        <p>
-            {% if user == current_user %}
-        <a href="{{url_for('main.update_profile',uname=user.username)}}" class="btn btn-sm btn-outline-warning mx-auto d-block my-2">Edit profile</a>
-            {% endif %}
-        </p>
-    
-    </div>
-    <div class="col-md-4">
-                    {% if user.profile_pic_path %}
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h3> {{user.username| capitalize}} </h3>
+                </li>
+                <li class="list-group-item">
+                    Email <span class="text-muted">
+                    <p>{{user.email}}</p> 
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    Bio <span class="text-muted">
+                        {% if user.bio %}
+                        <p> {{user.bio}}</p>
+                        {%else%}
+                        <p> {{user.username| capitalize}} has no bio </p>
+                        {% endif %}
+                    </span>
+                
+            </ul>
+            
+            <p>
+                {% if user == current_user %}
+            <a href="{{url_for('main.update_profile',uname=user.username)}}" class="btn btn-sm btn-outline-warning mx-auto d-block my-2">Edit profile</a>
+                {% endif %}
+            </p>
+        
+        </div>
+        <div class="col-md-3">
+                        {% if user.profile_pic_path %}
 
-                    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+                        <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
 
-                    {%else%}
-                    <p>No profile picture</p>
+                        {%else%}
+                        <p>No profile picture</p>
 
-                    {% endif %}
+                        {% endif %}
 
-                        {% if user == current_user %}
-                    <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
+                            {% if user == current_user %}
+                        <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
 
-                    <input type="file"  name="photo" class="form-control input-sm  my-1" required>
-                    <input type="submit" class="btn btn-sm my-1 btn-success">
-                    </form>
-                    {% endif %}
-    </div>
+                        <input type="file"  name="photo" class="form-control input-sm  my-1" required>
+                        <input type="submit" class="btn btn-sm my-1 btn-success">
+                        </form>
+                        {% endif %}
+        </div>
+        <div class="col-md-6">
+              <div class="user-pitches">
+                {% if user.pitches.count() > 0 %}
+                <h4 class="text-center">My Pitches</h4>
+                      <ul class="list-group">
+                            {% for data in user.pitches %}
+                                  
+                                    <div class="card m-1 card-border" style="width: 100%;">
+                                        <div class="card-body card-border">
+                                            <p class="card-text font-italic text-mutedd">{{data.pitch | safe}}.</p>
+                                            <small class="text-muted float-right"> 
+                                                - {{data.user.username}}
+                                            </small>
+                                        </div>
+                                        <div class="card-footer card-border">
+                                            <div class="row">
+                                            
+                                                <div class="col-md-12">
+                                                    <div class="float-left">
+                                                        <span>
+                                                            <small>
+                                                                <i class="fa fa-thumbs-up " aria-hidden="true"></i>:{{data.upvote}}
+                                                            </small>
+                                                        
+                                                        </span> |
+                                                        <span>
+                                                            <small>
+                                                                <i class="fa fa-thumbs-down " aria-hidden="true"></i>:{{data.downvote}}
+                                                            </small>
+                                                        
+                                                        </span>                                
+                        
+                                                    </div>
+                                                    <div class="float-right">
+                                                        <button class="btn btn-sm btn-outline-info"  data-toggle="modal" data-target="#modal{{data.id}}">
+                                                            View Comments
+                                                            <span class="badge badge-warning">
+                                                                {{ data.comments.count() }}
+                                                            </span>
+                                                        </button>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                        
+                                            </div>
+                                        
+                                        </div>
+                                    </div>
+                                    {% include '_modal_profile.html' %}
+                        {%endfor%}
+                      </ul>
+                {% else %}
+                <p>No pitches</p>
+                {% endif %}
+              </div>
+               
+        </div>
     </div>
 
 </div>
