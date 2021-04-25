@@ -4,6 +4,7 @@ class Config:
     '''General configuration parent class'''
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://kenneth:admin@localhost/pitchapp'
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
 
 
 class DevConfig(Config):
