@@ -12,28 +12,45 @@ Email:kenthumi@gmail.com
 ## Setup instructions
 Below are steps to follow:
 1. Open cli, navigate to your project folder and clone the project: <br/>
-    `git clone https://github.com/KenThumi/PitchAPP.git`
+         `git clone https://github.com/KenThumi/PitchAPP.git`
 2. Install python, preferably python3.
 3. Create a virtual environment: <br/>
-    `python3 -m venv virtual`
+         `python3 -m venv virtual`
 4. To activate the virtual environment run:<br/>
-    `source virtual/bin/activate`
+         `source virtual/bin/activate`
 5. Now, in the virtual environment, install Flask to the project using the following command:<br/>
-    `pip install flask`
-6. Install flak bootstrap and flask script respectively:<br/>
-        `pip install flask-bootstrap4`<br/>
-        `pip install flask_script`
+         `pip install flask`
+6. Install dependencies that dont come with flask (as at now 04/2021) above:<br/>
+        `pip install flask-bootstrap4==4.0.2`<br/>
+        `pip install flask_script==2.0.6`<br/>
+        `pip install alembic==1.5.8`<br/>
+        `pip install email-validator==1.1.2`<br/>
+        `pip install Flask-Login==0.5.0`<br/>
+        `pip install Flask-Mail==0.9.1`<br/>
+        `pip install Flask-Migrate==2.7.0`<br/>
+        `pip install Flask-Script==2.0.6`<br/>
+        `pip install Flask-SQLAlchemy==2.5.1`<br/>
+        `pip install Flask-Uploads==0.2.1`<br/>
+        `pip install Flask-WTF==0.14.3`<br/>
+        `pip install psycopg2==2.8.6`<br/>
+        `pip install SQLAlchemy==1.4.11`<br/>
+        `pip install Werkzeug==0.16.0`<br/>
+        `pip install WTForms==2.3.3`
+7. Install postgres. Run below cli command, inside project folder, to set up the db: <br/>
+            `python3 manage.py db ugrade`
 7. Head over to [New API](https://newsapi.org/) and generate API key. To generate SECRET KEY 
     , open REPL by typing command `python3`. Enter these commands: <br/>
             `import secrets` <br/>
             `secrets.token_hex(16)`<br/>
     Where 16 is key length. Copy the keys to somewhere.
-8. To register the API KEY and SECRET KEY to OS for use, enter these command. Enter the respective key where necessary <br/>
-   
-    `export SECRET_KEY='secret key generated'`
+8. To register the SECRET KEY (for csrf protection), MAIL_USERNAME (email for sending mails) and MAIL_PASSWORD <br>
+(email password) to OS for use, enter these commands from the cli. Enter the respective value where necessary <br/>
+            `export SECRET_KEY='secret key generated'` <br/>
+            `export MAIL_USERNAME='your email'`        <br/>
+            `export MAIL_PASSWORD='your email password'`
 
 9. Inside the same folder,  type following commands to start the application:<br/>
-    `python3 manage.py server`
+            `python3 manage.py server`
 10. Open browser and input `http://127.0.0.1:5000`
 11. To edit, use IDE of your choice to work with the project, e.g VsCode, Sublime text ,etc.
 
@@ -42,6 +59,8 @@ In this project, below is a list of technologies used:
 - [Python version 3](https://www.python.org/)
 
 ## Dependencies
+Below are all dependencies for this application: <br>
+
 alembic==1.5.8,
 blinker==1.4,
 click==7.1.2,
