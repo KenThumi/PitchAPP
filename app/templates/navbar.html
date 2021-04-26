@@ -51,7 +51,8 @@
         
         <!-- end exported -->
         {% else %}
-        <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+        <li><a style="color: black;" href="{{url_for('auth.login')}}">Sign in</a></li>
+        <li><a style="color: black;" class="ml-3" href="{{url_for('auth.register')}}">Sign up</a></li>
         {%endif%}
       </ul>
       
