@@ -2,7 +2,7 @@ import os
 
 class Config:
     '''General configuration parent class'''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://kenneth:admin@localhost/pitchapp'
+    
     SECRET_KEY = os.environ.get('SECRET_KEY')
     UPLOADED_PHOTOS_DEST ='app/static/photos'
     #  email configurations
@@ -21,6 +21,7 @@ class DevConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://kenneth:admin@localhost/pitchapp'
 
 
 class ProdConfig(Config):
@@ -31,8 +32,8 @@ class ProdConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
-        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
+    # if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+    #     SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
 
 
 class TestConfig(Config):
@@ -42,7 +43,8 @@ class TestConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    pass
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://kenneth:admin@localhost/pitchapp_test'
+
 
 config_options = {
     'development':DevConfig,
