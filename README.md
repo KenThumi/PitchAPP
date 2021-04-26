@@ -1,7 +1,7 @@
 # Pitch Application
 ## Description
 Welcome to this Pitch application. The app is a platform whereby registered users can post their pitches <br>
-based on any categories. Others users can like and comment (provided they are registered).
+based on any categories. Others users can like, vote and comment (provided they are registered).
 
 ## Author
 - [Kenneth Thumi](https://github.com/KenThumi)
