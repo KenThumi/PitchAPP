@@ -37,7 +37,7 @@ Below are steps to follow:
         `pip install Werkzeug==0.16.0`<br/>
         `pip install WTForms==2.3.3`
 7. Install postgres. Run below cli command, inside project folder, to set up the db: <br/>
-            `python3 manage.py db ugrade`
+            `python3 manage.py db upgrade`
 7. Head over to [New API](https://newsapi.org/) and generate API key. To generate SECRET KEY 
     , open REPL by typing command `python3`. Enter these commands: <br/>
             `import secrets` <br/>
@@ -57,6 +57,8 @@ Below are steps to follow:
 ## Technologies Used
 In this project, below is a list of technologies used:
 - [Python version 3](https://www.python.org/)
+- HTML
+- CSS (Less, SCSS)
 
 ## Dependencies
 Below are all dependencies for this application: <br>
