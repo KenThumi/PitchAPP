@@ -22,39 +22,39 @@ Below are steps to follow:
          `pip install flask`
 6. Install dependencies that dont come with flask above:<br/>
          `pip install -r requirements.txt` 
-7. Install postgres (Linux-Ubuntu).
+7. Install postgres (Linux-Ubuntu).  
         `sudo apt-get update` <br/>
-        `sudo apt-get install postgresql postgresql-contrib libpq-dev` <br>
+        `sudo apt-get install postgresql postgresql-contrib libpq-dev` <br>  
  Create our own superuser role to connect to the server. <br>
         `sudo service postgresql start` <br>
         `sudo -u postgres createuser --superuser $USER` <br>
-        `sudo -u postgres createdb $USER` <br>
+        `sudo -u postgres createdb $USER` <br>  
  To save your history, navigate to your home directory and enter the following command to create the .psql_history  <br>
-        `touch .psql_history`
+        `touch .psql_history`  <br>
  Connect to the postgres server by typing <br>
-        `psql` <br>
+        `psql` <br>  
  Create your db. <br>
-        `#  CREATE DATABASE your_db;`
+        `#  CREATE DATABASE your_db;` <br>  
  In your `Config.py` file edit `SQLALCHEMY_DATABASE_URI` variable in `DevConfig` class as below:<br>
-        `SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://username:password@localhost/your_db'` <br>
- Put your role `username` (computer account name in this case) , role `password `and `your_db`.
+        `SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://username:password@localhost/your_db'` <br>  
+ Put your role `username` (computer account name in this case) , role `password `and `your_db`.  
  Run below cli command, inside project folder, to set up the db with our tables: <br/>
-            `python3 manage.py db upgrade`
-7. Head over to [New API](https://newsapi.org/) and generate API key. To generate SECRET KEY 
+            `python3 manage.py db upgrade`  
+8. Head over to [New API](https://newsapi.org/) and generate API key. To generate SECRET KEY 
     , open REPL by typing command `python3`. Enter these commands: <br/>
             `import secrets` <br/>
             `secrets.token_hex(16)`<br/>
     Where 16 is key length. Copy the keys to somewhere.
-8. To register the SECRET KEY (for csrf protection), MAIL_USERNAME (email for sending mails) and MAIL_PASSWORD <br>
+9. To register the SECRET KEY (for csrf protection), MAIL_USERNAME (email for sending mails) and MAIL_PASSWORD <br>
  (email password) to OS for use, enter these commands from the cli. Enter the respective value where necessary <br/>
             `export SECRET_KEY='secret key generated'` <br/>
             `export MAIL_USERNAME='your email'`        <br/>
             `export MAIL_PASSWORD='your email password'`
 
-9. Inside the same folder,  type following commands to start the application:<br/>
+10. Inside the same folder,  type following commands to start the application:<br/>
             `python3 manage.py server`
-10. Open browser and input `http://127.0.0.1:5000`
-11. To edit, use IDE of your choice to work with the project, e.g VsCode, Sublime text ,etc.
+11. Open browser and input `http://127.0.0.1:5000`
+12. To edit, use IDE of your choice to work with the project, e.g VsCode, Sublime text ,etc.
 
 ## Technologies Used
 In this project, below is a list of technologies used:
