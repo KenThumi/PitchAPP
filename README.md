@@ -20,23 +20,25 @@ Below are steps to follow:
          `source virtual/bin/activate`
 5. Now, in the virtual environment, install Flask to the project using the following command:<br/>
          `pip install flask`
-6. Install dependencies that dont come with flask (as at now 04/2021) above:<br/>
-        `pip install flask-bootstrap4==4.0.2`<br/>
-        `pip install flask_script==2.0.6`<br/>
-        `pip install alembic==1.5.8`<br/>
-        `pip install email-validator==1.1.2`<br/>
-        `pip install Flask-Login==0.5.0`<br/>
-        `pip install Flask-Mail==0.9.1`<br/>
-        `pip install Flask-Migrate==2.7.0`<br/>
-        `pip install Flask-Script==2.0.6`<br/>
-        `pip install Flask-SQLAlchemy==2.5.1`<br/>
-        `pip install Flask-Uploads==0.2.1`<br/>
-        `pip install Flask-WTF==0.14.3`<br/>
-        `pip install psycopg2==2.8.6`<br/>
-        `pip install SQLAlchemy==1.4.11`<br/>
-        `pip install Werkzeug==0.16.0`<br/>
-        `pip install WTForms==2.3.3`
-7. Install postgres. Run below cli command, inside project folder, to set up the db: <br/>
+6. Install dependencies that dont come with flask above:<br/>
+         `pip install -r requirements.txt` 
+7. Install postgres (Linux-Ubuntu).
+        `sudo apt-get update` <br/>
+        `sudo apt-get install postgresql postgresql-contrib libpq-dev` <br>
+ Create our own superuser role to connect to the server. <br>
+        `sudo service postgresql start` <br>
+        `sudo -u postgres createuser --superuser $USER` <br>
+        `sudo -u postgres createdb $USER` <br>
+ To save your history, navigate to your home directory and enter the following command to create the .psql_history  <br>
+        `touch .psql_history`
+ Connect to the postgres server by typing <br>
+        `psql` <br>
+ Create your db. <br>
+        `#  CREATE DATABASE your_db;`
+ In your `Config.py` file edit `SQLALCHEMY_DATABASE_URI` variable in `DevConfig` class as below:<br>
+        `SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://username:password@localhost/your_db'` <br>
+ Put your role `username` (computer account name in this case) , role `password `and `your_db`.
+ Run below cli command, inside project folder, to set up the db with our tables: <br/>
             `python3 manage.py db upgrade`
 7. Head over to [New API](https://newsapi.org/) and generate API key. To generate SECRET KEY 
     , open REPL by typing command `python3`. Enter these commands: <br/>
@@ -44,7 +46,7 @@ Below are steps to follow:
             `secrets.token_hex(16)`<br/>
     Where 16 is key length. Copy the keys to somewhere.
 8. To register the SECRET KEY (for csrf protection), MAIL_USERNAME (email for sending mails) and MAIL_PASSWORD <br>
-(email password) to OS for use, enter these commands from the cli. Enter the respective value where necessary <br/>
+ (email password) to OS for use, enter these commands from the cli. Enter the respective value where necessary <br/>
             `export SECRET_KEY='secret key generated'` <br/>
             `export MAIL_USERNAME='your email'`        <br/>
             `export MAIL_PASSWORD='your email password'`
